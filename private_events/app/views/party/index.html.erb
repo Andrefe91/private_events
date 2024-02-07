@@ -1,2 +1,13 @@
 <h1>Party#index</h1>
 <p>Find me in app/views/party/index.html.erb</p>
+
+<% if user_signed_in? %>
+    <div>Hello <%= current_user.email %></div>
+    <div>
+        <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
+    </div>
+<% else %>
+    <div>Please, Log In to see the events</div>
+    <%= link_to "[Sign Up]", new_user_registration_path %>
+    <%= link_to "[Log In]", new_user_session_path %>
+<% end %>
