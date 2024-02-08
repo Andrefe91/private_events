@@ -1,5 +1,4 @@
-<h1>Party#index</h1>
-<p>Find me in app/views/party/index.html.erb</p>
+<h1>Party Programmer</h1>
 
 <% if user_signed_in? %>
     <div>Hello <%= current_user.email %></div>
@@ -11,3 +10,27 @@
     <%= link_to "[Sign Up]", new_user_registration_path %>
     <%= link_to "[Log In]", new_user_session_path %>
 <% end %>
+
+<% if user_signed_in? %>
+    <div>
+        <h3>This are the events you have created: </h3>
+        <ul>
+            <% @parties.each do |party| %>
+                <li>
+                    <div>
+                        <p>
+                            <strong>Where?: </strong> <%= party.place %>
+                        </p>
+                        <p>
+                            <strong>When?: </strong> <%= party.date %>
+                        </p>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= link_to "[New Party]", new_party_path %>
+
+
