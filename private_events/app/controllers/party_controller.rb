@@ -9,7 +9,7 @@ class PartyController < ApplicationController
   end
 
   def create
-    @party = current_user.parties.build(party_params)
+    @party = current_user.parties.create(party_params)
 
     if @party.save
       redirect_to party_path(@party)
@@ -17,8 +17,6 @@ class PartyController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-
 
   private
 
