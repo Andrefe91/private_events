@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
+  # get 'users/show'
+  # get 'user/show'
   # get 'parties/index'
   # get 'parties/new'
   # get 'parties/create'
 
+  resources :users, only: [:show]
   resources :parties
   root "parties#index"
 

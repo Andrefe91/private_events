@@ -1,2 +1,29 @@
-<h1>Parties#new</h1>
-<p>Find me in app/views/parties/new.html.erb</p>
+<% @party.errors.each do |error| %>
+    <ul>
+        <li><%= error.full_message %></li>
+    </ul>
+<% end %>
+
+
+<h1>Create new event:</h1>
+
+<%= form_with model: @party do |form| %>
+    <div>
+        <%= form.label :place %>
+        <%= form.text_field :place %>
+    </div>
+
+    <div>
+        <%= form.label :date %>
+        <%= form.date_select :date %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+
+    <div>
+        <%= link_to "Back", root_path %>
+    </div>
+
+<% end %>

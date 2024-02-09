@@ -1,0 +1,16 @@
+<h1>Event Information:</h1>
+
+<div><strong>Place/Site:</strong>  <%= @party.place %></div>
+<div> <strong>Date:</strong> <%= @party.date %></div>
+<div><strong>Organizer:</strong> <%= User.find(@party.creator_ids.to_a[0]).email %></div>
+
+<h2>Atendees:</h2>
+
+<ul>
+    <li>
+        In construction
+    </li>
+</ul>
+
+<%= link_to "[Back]", user_path(current_user.id) %>
+<%= link_to "[Home Page]", root_path %>
