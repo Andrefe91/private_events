@@ -4,13 +4,10 @@
     </ul>
 <% end %>
 
-<div>
-    Hi <%= @party %>
-</div>
 
 <h1>Create new event:</h1>
 
-<%= form_with model: @party, url: parties_path do |form| %>
+<%= form_with model: @party do |form| %>
     <div>
         <%= form.label :place %>
         <%= form.text_field :place %>
@@ -22,7 +19,7 @@
     </div>
 
     <div>
-        <%= form.submit(to: parties_path) %>
+        <%= form.submit %>
     </div>
 
     <div>
