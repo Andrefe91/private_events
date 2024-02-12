@@ -1,2 +1,22 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h1>Event Information:</h1>
+
+<div><strong>Place/Site:</strong>  <%= @event.place %></div>
+<div> <strong>Date:</strong> <%= @event.date %></div>
+<div><strong>Organizer:</strong> <%= User.find(@event.user_id).email %></div>
+
+<h2>Atendees:</h2>
+
+<ul>
+    <li>
+        <% if @event.attendees.count == 0 %>
+            <div>None Confirmed</div>
+        <% else %>
+            <% @event.attendees.each do |attendee| %>
+                <div><%= attendee.email %></div>
+            <% end %>
+        <% end %>
+    </li>
+</ul>
+
+<%= link_to "[Back]", user_path(current_user.id) %>
+<%= link_to "[Home Page]", root_path %>
