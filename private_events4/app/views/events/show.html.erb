@@ -2,8 +2,23 @@
 
 <div><strong>Place/Site:</strong>  <%= @event.place %></div>
 <div> <strong>Date:</strong> <%= @event.date %></div>
-<div><strong>Organizer:</strong> <%= User.find(@event.user_id).email %></div>
+<div><strong>Organizer:</strong>
+                <% if @event.user_id == current_user.id %>
+                    You
+                <% else %>
+                    <%= User.find(@event.user_id).email %>
+                <% end %>
+</div>
 
+<%# Assisting to event logic %>
+<%  %>
+
+
+<% if @event.user_id != current_user.id %>
+    <div><%= button_to "[I'm Assisting]", invitations_path(id: @event.id), mehtod: :post %></div>
+<% end %>
+
+<%# Atendees display logic: %>
 <h2>Atendees:</h2>
 
 <ul>
@@ -18,5 +33,5 @@
     </li>
 </ul>
 
-<%= link_to "[Back]", user_path(current_user.id) %>
+<%= link_to "[Back to Profile]", user_path(current_user.id) %>
 <%= link_to "[Home Page]", root_path %>

@@ -8,3 +8,33 @@
 <div>
     <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
 </div>
+
+<br>
+<div>This are the current public events: </div>
+
+<div>
+    <ul>
+        <% @events.each do |event| %>
+        <li>
+            <div>
+                <strong>Where?: </strong> <%= event.place %>
+            </div>
+            <div>
+                <strong>When?: </strong> <%= event.date %>
+            </div>
+            <div>
+                <strong>Organizer?: </strong>
+                <% if event.user_id == current_user.id %>
+                    You
+                <% else %>
+                    <%= User.find(event.user_id).email %>
+                <% end %>
+            </div>
+            <div>
+                <%= link_to "[Show Event]",  event_path(event)%>
+            </div>
+        <br>
+        </li>
+        <% end %>
+    </ul>
+</div>
