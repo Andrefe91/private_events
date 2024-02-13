@@ -15,8 +15,11 @@
 
 <% if @event.user_id != current_user.id %>
     <% if @event.attendee_ids.include?(current_user.id) %>
-        <div><%= link_to "[I'm NO Longer Going]", invitation_path(id: @event.id), data: {
-            turbo_method: :delete }%></div>
+        <%# by default, button_to submits a form, expecting a form element to surround the button %>
+        <%# Wrap the button in a form with the method set to "delete" and the action to the desired path%>
+        <%= form_tag invitation_path(id: @event.id), method: :delete do %>
+            <%= button_to "[Im NO longer going]" %>
+        <% end %>
     <% else %>
         <div><%= button_to "[I'm Assisting]", invitations_path(id: @event.id) %></div>
     <% end %>
@@ -37,5 +40,5 @@
     </li>
 </ul>
 
-<%= link_to "[Back to Profile]", user_path(current_user.id) %>
 <%= link_to "[Home Page]", root_path %>
+<%= link_to "[Back to Profile]", user_path(current_user.id) %>
