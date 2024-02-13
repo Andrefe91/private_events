@@ -4,6 +4,7 @@
 <h1>My events: </h1>
 
 <%= link_to "[New Event]", new_event_path %>
+<%= link_to "[Home Page]", root_path %>
 
 
 <div>
@@ -29,4 +30,45 @@
     </ul>
 </div>
 
-<%= link_to "[Home Page]", root_path %>
+
+<div>
+    <h4>This are your previous events:</h4>
+    <% events = current_user.attended_events %>
+    <% past_events = events.where(date: (..(Date.today-1))).order(date: :desc) %>
+    <% current_events = events.where(date: (Date.today..)).order(date: :asc)  %>
+
+    <ul>
+        <% past_events.each do |event| %>
+            <li>
+                <div>
+                    <p>
+                        <strong>Where?: </strong> <%= event.place %>
+                    </p>
+                    <p>
+                        <strong>When?: </strong> <%= event.date %>
+                    </p>
+                </div>
+                <%= link_to "[Show Event]",  event_path(event)%>
+            </li>
+        <% end %>
+    </ul>
+</div>
+
+<div>
+    <h4>And this are the events you are assisting:</h4>
+    <ul>
+        <% current_events.each do |event| %>
+            <li>
+                <div>
+                    <p>
+                        <strong>Where?: </strong> <%= event.place %>
+                    </p>
+                    <p>
+                        <strong>When?: </strong> <%= event.date %>
+                    </p>
+                </div>
+                <%= link_to "[Show Event]",  event_path(event)%>
+            </li>
+        <% end %>
+    </ul>
+</div>
