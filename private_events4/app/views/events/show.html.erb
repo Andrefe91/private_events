@@ -11,11 +11,15 @@
 </div>
 
 <%# Assisting to event logic %>
-<%  %>
 
 
 <% if @event.user_id != current_user.id %>
-    <div><%= button_to "[I'm Assisting]", invitations_path(id: @event.id), mehtod: :post %></div>
+    <% if @event.attendee_ids.include?(current_user.id) %>
+        <div><%= link_to "[I'm NO Longer Going]", invitation_path(id: @event.id), data: {
+            turbo_method: :delete }%></div>
+    <% else %>
+        <div><%= button_to "[I'm Assisting]", invitations_path(id: @event.id) %></div>
+    <% end %>
 <% end %>
 
 <%# Atendees display logic: %>
